@@ -1,11 +1,17 @@
 const db = require('../../config/fire-base');
 
-const find = async ({ model, id = '' }) => {
+const find = async ({ model, key, value }) => {
   try {
-    const res = await db.ref(`/${model}/`).once('value');
-    return res.val();
+    if (key) {
+      return (await db
+        .ref(model)
+        .orderByChild(key)
+        .equalTo(value)
+        .once('child_added')).val();
+    }
+    return (await db.ref(model).once('value')).val();
   } catch (err) {
-    return err;
+    throw new Error(err);
   }
 };
 
