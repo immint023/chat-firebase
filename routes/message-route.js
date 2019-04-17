@@ -1,9 +1,11 @@
 const express = require('express');
-const router = express.Router();
+const { authorize } = require('../middlewares/auth');
 const controller = require('../controllers/message-controller');
 
-router.route('/')
-  .get(controller.getList)
+const router = express.Router();
+router
+  .route('/')
+  .get(authorize(), controller.getList)
   .post(controller.create);
 
 module.exports = router;

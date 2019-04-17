@@ -46,6 +46,7 @@ module.exports.login = async (req, res, next) => {
       key: 'username',
       value: username,
     });
+    console.log(user);
     if (!user) {
       return res.status(httpStatus.BAD_REQUEST).json({
         message: 'username or password is not correct.',

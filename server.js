@@ -5,17 +5,18 @@ const cors = require('cors');
 
 const bodyParser = require('body-parser');
 const path = require('path');
-// const passport = require('passport');
+const passport = require('passport');
 
 const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
 const routes = require('./routes');
-// const strategies = require('./config/passport');
+
+app.use(passport.initialize());
+require('./config/passport-jwt')(passport);
 
 app.use(express.static('public'));
-// app.use(passport.initialize());
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -30,8 +31,6 @@ app.get('/', (req, res, next) => {
   res.sendFile(path.resolve(__dirname, 'index.html'));
 });
 
-// passport.use(strategies.login);
-
 io.on('connection', function(socket) {
   console.log('connected');
   socket.on('send', function(data) {
@@ -40,8 +39,8 @@ io.on('connection', function(socket) {
 });
 
 app.use((err, req, res, next) => {
-  res.json({
-    status: 400,
+  res.status(err.status || 400).json({
+    status: err.status || 400,
     message: err.message || err,
     stack: err.stack || err,
   });
