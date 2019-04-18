@@ -5,16 +5,12 @@ const cors = require('cors');
 
 const bodyParser = require('body-parser');
 const path = require('path');
-const passport = require('passport');
 
 const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
 const routes = require('./routes');
-
-app.use(passport.initialize());
-require('./config/passport-jwt')(passport);
 
 app.use(express.static('public'));
 app.use(bodyParser.json());

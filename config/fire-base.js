@@ -1,11 +1,12 @@
+require('dotenv').config();
 const firebase = require('firebase');
 const config = {
-  apiKey: 'AIzaSyCFniyDwgulaMD0lXT9Qv9eUQhSxwTd4-U',
-  authDomain: 'chat-realtime-c0649.firebaseapp.com',
-  databaseURL: 'https://chat-realtime-c0649.firebaseio.com',
-  projectId: 'chat-realtime-c0649',
-  storageBucket: 'chat-realtime-c0649.appspot.com',
-  messagingSenderId: '1023331643779',
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  databaseURL: process.env.DB_URL,
+  projectId: process.env.PJ_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGE_SENDER,
 };
 
 firebase.initializeApp(config);

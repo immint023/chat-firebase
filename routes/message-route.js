@@ -5,7 +5,7 @@ const controller = require('../controllers/message-controller');
 const router = express.Router();
 router
   .route('/')
-  .get(authorize(), controller.getList)
+  .get(controller.getList)
   .post(controller.create);
 
 module.exports = router;
