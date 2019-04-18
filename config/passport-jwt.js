@@ -1,6 +1,4 @@
 const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
-// const JwtStrategy = require('passport-jwt').Strategy;
-// const ExtractJwt = require('passport-jwt').ExtractJwt;
 const { find } = require('../utils/fire-base');
 
 const opts = {

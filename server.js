@@ -38,6 +38,15 @@ io.on('connection', function(socket) {
   });
 });
 
+const admin = require('firebase-admin');
+
+const serviceAccount = require('./credential.json');
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: 'https://chat-realtime-c0649.firebaseio.com',
+});
+
 app.use((err, req, res, next) => {
   res.status(err.status || 400).json({
     status: err.status || 400,
